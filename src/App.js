@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Style from "../src/index.css";
+// import Style from "../src/index.css";
 
 function App() {
   const [list, setList] = useState([]);
   const [input, setInput] = useState("");
+  const enableButton = input.length > 0;
 
   const addToDo = (todo) => {
     const newToDo = {
@@ -32,13 +33,15 @@ function App() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={() => addToDo(input)}> ADD </button>
+      <button onClick={() => addToDo(input)} 
+      disabled={!enableButton || input.length < 0}
+       > ADD </button>
       <div className="input-btn">
         {list.map((todo) => (
           <li key={todo.id}>
             <div className="list-item">{todo.todo}</div>
 
-            <button onClick={() => deleteToDo(todo.id)}>&times;</button>
+            <button onClick={() => deleteToDo(todo.id)}>DELETE</button>
           </li>
         ))}
       </div>
